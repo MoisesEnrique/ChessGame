@@ -35,12 +35,8 @@ if(ANDROID)
     mainwindow.ui
   )
 else()
-  add_executable(ChessGame
-    main.cpp
-    mainwindow.cpp
-    mainwindow.h
-    mainwindow.ui
-  )
+  file(GLOB files "*.h" "*.cpp" "*.ui")
+  add_executable(ChessGame ${files})
 endif()
 
 target_link_libraries(ChessGame PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
