@@ -9,7 +9,7 @@ Pawn::Pawn(QWidget* parent, bool colour) : Piece(parent, colour)
     else
         Icon.load("../ChessGame/Icons/Pawn_black.png");
 
-    this->setPixmap(this->Icon.scaled(QSize(47,47), Qt::KeepAspectRatio));
+    this->setPixmap(this->Icon.scaled(QSize(35,45), Qt::KeepAspectRatio));
 
 }
 

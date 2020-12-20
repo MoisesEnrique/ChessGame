@@ -15,11 +15,11 @@ protected:
     QPixmap Icon;
 public:
     bool colour;
+    QPoint coordinate{};
 
 public:
     explicit Piece(QWidget* parent = nullptr, bool _colour = true);
 
-    //funciones de la pieza
 };
 
 #endif // PIECE_H

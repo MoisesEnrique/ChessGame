@@ -1,5 +1,7 @@
 #include "Board.h"
 #include <memory>
+#include <iostream>
+#include <cmath>
 #include "ui_Board.h"
 
 Board::Board(QWidget *parent) :
@@ -37,8 +39,7 @@ void Board::drawPieces()
                     this->white_pieces.push_back(newPiece);
                 else
                     this->black_pieces.push_back(newPiece);
-                //newPiece->move(c*55.f+10.f, f*56.f+10.f);
-                newPiece->setGeometry(c*55.f+10.f, f*56.f+10.f, 47, 47);
+                newPiece->setGeometry(c*55+10, f*55+10, 40, 45);
                 newPiece->setCursor(Qt::PointingHandCursor);
                 newPiece->show();
 
@@ -104,8 +105,11 @@ void Board::mousePressEvent(QMouseEvent* event)
 
     QByteArray data;
     QDataStream dataStream(&data, QIODevice::WriteOnly);
-    //dataStream << QPoint(event->pos() - child->pos());
-    dataStream << QPoint(child->pos());
+
+    auto childP = static_cast<Piece*>(child);
+    childP->coordinate = QPoint(child->pos().x(), child->pos().y());
+
+    dataStream << QPoint(event->pos());
 
     QMimeData* mimeData = new QMimeData();
     mimeData->setData("application/x-dnditemdata", data);
@@ -144,31 +148,58 @@ void Board::dragEnterEvent(QDragEnterEvent* event)
 
 }
 
-void Board::dropEvent(QDropEvent* event)
+void Board::dropEvent(QDropEvent* e)
 {
-    if (event->mimeData()->hasFormat("application/x-dnditemdata")) {
-        QByteArray itemData = event->mimeData()->data("application/x-dnditemdata");
+    if (e->mimeData()->hasFormat("application/x-dnditemdata")) {
+        QByteArray itemData = e->mimeData()->data("application/x-dnditemdata");
         QDataStream dataStream(&itemData, QIODevice::ReadOnly);
 
-        QPoint offset;
+        QPoint offset; // posición de donde se hizo click
         dataStream >> offset;
 
-        Piece* p = (Piece*) childAt(offset);
-        int xPos = ((event->pos().x())/ 55) * 55 + 10;
-        int yPos = ((event->pos().y())/ 55) * 55 + 10;
+        Piece* p = static_cast<Piece*>(childAt(offset));
 
-        QPoint destinyPoint(xPos, yPos);
-        p->move(destinyPoint);
+        //if (p->coordinate == )
+        QPoint n = e->pos() - offset + p->coordinate;
 
-        //piece->move(event->pos() - offset);
+        int newX = ((n.x())/ 55) * 55 + 10;
+        int newY = ((n.y())/ 55) * 55 + 10;
 
-        if (event->source() == this) {
-            event->setDropAction(Qt::MoveAction);
-            event->accept();
+        QPoint newPosition(newX, newY);
+
+        //std::cout << p->coordinate.x() << ", " << p->coordinate.y() << std::endl;
+        //std::cout << "to " << newPosition.x() << ", " <<newPosition.y() << std::endl;
+
+
+        if (p->coordinate != newPosition)
+        {
+            std::cout << "Lo hace" << std::endl;
+            p->move(newPosition);
+            p->coordinate = newPosition;
+            p->show();
+
+            for(int i = 0; i < white_pieces.size(); ++i)
+            {
+                if ( (std::abs(white_pieces[i]->x() - p->coordinate.x()) <= 2)
+                     && (std::abs(white_pieces[i]->y() - p->coordinate.y()) <= 2))
+                {
+                    white_pieces.removeAt(i);
+                    break;
+                }
+            }
+
+        }else if (p->coordinate == newPosition){
+            std::cout << "no lo hace" << std::endl;
+        }
+
+
+        if (e->source() == this) {
+            e->setDropAction(Qt::MoveAction);
+            e->accept();
         } else {
-            event->acceptProposedAction();
+            e->acceptProposedAction();
         }
     } else {
-        event->ignore();
+        e->ignore();
     }
 }
