@@ -8,7 +8,8 @@ class Pawn : public Piece
 {
     Q_OBJECT
 public:
-    explicit Pawn(QWidget* parent = nullptr);
+    explicit Pawn(QWidget* parent = nullptr, bool colour = true);
+    ~Pawn();
 };
 
 

@@ -13,9 +13,11 @@ class Piece : public QLabel
     Q_OBJECT
 protected:
     QPixmap Icon;
+public:
+    bool colour;
 
 public:
-    explicit Piece(QWidget* parent = nullptr);
+    explicit Piece(QWidget* parent = nullptr, bool _colour = true);
 
     //funciones de la pieza
 };

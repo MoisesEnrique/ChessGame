@@ -7,7 +7,7 @@ class Rook : public Piece
 {
     Q_OBJECT
 public:
-    explicit Rook(QWidget* parent = nullptr);
+    explicit Rook(QWidget* parent = nullptr, bool colour = true);
 };
 
 #endif // ROOK_H

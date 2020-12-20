@@ -8,7 +8,7 @@ class Bishop : public Piece
 {
     Q_OBJECT
 public:
-    explicit Bishop(QWidget* parent = nullptr);
+    explicit Bishop(QWidget* parent = nullptr, bool colour = true);
 };
 
 #endif // BISHOP_H
