@@ -41,22 +41,18 @@ private:
     QVector<QVector<char>> BoardData{
         {'R','H','B','Q','K','B','H','R'},
         {'P','P','P','P','P','P','P','P'},
-        {'0','0','0','0','0','0','0','0'},
-        {'0','0','0','0','0','0','0','0'},
-        {'0','0','0','0','0','0','0','0'},
-        {'0','0','0','0','0','0','0','0'},
+        {'x','x','x','x','x','x','x','x'},
+        {'x','x','x','x','x','x','x','x'},
+        {'x','x','x','x','x','x','x','x'},
+        {'x','x','x','x','x','x','x','x'},
         {'p','p','p','p','p','p','p','p'},
         {'r','h','b','k','q','b','h','r'}
     };
 
-    //std::unique_ptr<Piece> piece;
+    QVector<std::shared_ptr<Piece>> Pieces{};
 
-    QVector<std::shared_ptr<Piece>> black_pieces{};
-    QVector<std::shared_ptr<Piece>> white_pieces{};
-public:
-
-    //const static QVector<QVector<char>> INITIAL_PIECES_BOARD;
-
+    //QVector<std::shared_ptr<Piece>> black_pieces{};
+    //QVector<std::shared_ptr<Piece>> white_pieces{};
 
 };
 

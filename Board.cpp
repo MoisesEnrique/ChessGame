@@ -33,12 +33,14 @@ void Board::drawPieces()
     for (int f = 0; f < BoardData.size(); ++f) {
         for (int c = 0; c < BoardData[f].size(); ++c) {
             type = BoardData[f][c];
-            if (type != '0'){
+            if (type != 'x'){
                 std::shared_ptr<Piece> newPiece = createPiece(type);
-                if(newPiece->colour)
+                this->Pieces.push_back(newPiece);
+                /*if(newPiece->colour)
                     this->white_pieces.push_back(newPiece);
                 else
                     this->black_pieces.push_back(newPiece);
+                    */
                 newPiece->setGeometry(c*55+10, f*55+10, 40, 45);
                 newPiece->setCursor(Qt::PointingHandCursor);
                 newPiece->show();
@@ -50,7 +52,7 @@ void Board::drawPieces()
 
 std::shared_ptr<Piece> Board::createPiece (char type)
 {
-    std::shared_ptr<Piece> newPiece = std::make_shared<Pawn>(this, true);
+    std::shared_ptr<Piece> newPiece = nullptr;
 
     switch (type) {
     case 'R':
@@ -167,31 +169,36 @@ void Board::dropEvent(QDropEvent* e)
 
         QPoint newPosition(newX, newY);
 
-        //std::cout << p->coordinate.x() << ", " << p->coordinate.y() << std::endl;
-        //std::cout << "to " << newPosition.x() << ", " <<newPosition.y() << std::endl;
-
+        std::cout << p->coordinate.x() << ", " << p->coordinate.y() << std::endl;
+        std::cout << "to " << newPosition.x() << ", " <<newPosition.y() << std::endl;
+        bool flag = false;
+        int i;
 
         if (p->coordinate != newPosition)
         {
-            std::cout << "Lo hace" << std::endl;
-            p->move(newPosition);
-            p->coordinate = newPosition;
-            p->show();
-
-            for(int i = 0; i < white_pieces.size(); ++i)
-            {
-                if ( (std::abs(white_pieces[i]->x() - p->coordinate.x()) <= 2)
-                     && (std::abs(white_pieces[i]->y() - p->coordinate.y()) <= 2))
-                {
-                    white_pieces.removeAt(i);
+            for(i = 0; i < Pieces.size(); ++i) {
+                if ( (std::abs(Pieces[i]->x() - newPosition.x()) <= 2)
+                     && (std::abs(Pieces[i]->y() - newPosition.y()) <= 2)) {
+                    flag = true;
                     break;
                 }
             }
 
-        }else if (p->coordinate == newPosition){
-            std::cout << "no lo hace" << std::endl;
-        }
+            if (flag) {
+                if(Pieces[i]->colour != p->colour)
+                {
+                    p->move(newPosition);
+                    p->coordinate = newPosition;
+                    p->show();
+                    Pieces.removeAt(i);
+                }
+            }else {
+                p->move(newPosition);
+                p->coordinate = newPosition;
+                p->show();
+            }
 
+        }
 
         if (e->source() == this) {
             e->setDropAction(Qt::MoveAction);
