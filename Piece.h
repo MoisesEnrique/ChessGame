@@ -3,6 +3,7 @@
 
 #include <QLabel>
 #include <QPixmap>
+#include <cmath>
 
 namespace Ui {
 class Piece;
@@ -14,13 +15,12 @@ class Piece : public QLabel
 public:
     QPixmap Icon;
     char type{};
-public:
     bool colour;
     QPoint coordinate{};
 
 public:
     explicit Piece(QWidget* parent = nullptr, bool _colour = true);
-
+    std::shared_ptr<QString> toNote();
 };
 
 #endif // PIECE_H

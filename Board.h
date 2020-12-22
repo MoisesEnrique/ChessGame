@@ -12,6 +12,7 @@
 #include "Bishop.h"
 #include "Pawn.h"
 #include "Knight.h"
+#include <QLabel>
 #include <QtWidgets>
 
 namespace Ui {
@@ -26,6 +27,7 @@ public:
     explicit Board(QWidget* parent = nullptr);
     ~Board();
 
+public:
     void paintEvent(QPaintEvent* event) override;
     void mousePressEvent(QMouseEvent* event) override;
     void dragMoveEvent(QDragMoveEvent* event) override;
@@ -33,7 +35,9 @@ public:
     void dropEvent(QDropEvent* event) override;
 
     void drawPieces();
+    void drawCells();
     std::shared_ptr<Piece> createPiece(char type);
+    std::shared_ptr<QString> toNote(QPoint& coord);
 
 signals:
     void removePieces(char type, bool colour);
@@ -54,6 +58,7 @@ private:
     };
 
     QVector<std::shared_ptr<Piece>> Pieces{};
+    QVector<std::shared_ptr<QLabel>> Cells{};
 
 };
 

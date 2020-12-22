@@ -2,12 +2,14 @@
 
 Piece::Piece(QWidget* parent, bool _colour) : QLabel(parent), colour{_colour}
 {
-    //this->setScaledContents(true);
-    //this->setSizePolicy( QSizePolicy::Ignored, QSizePolicy::Ignored );
-    //this->setText("Queen");
-    //en las clases derivadas
-    /*
-     * Icon.load("../");
-     * this->setPixmap(Icon);
-    */
+
+}
+
+std::shared_ptr<QString> Piece::toNote()
+{
+    char x = std::ceil(this->coordinate.x() / (450.f/8.f)) + 96;
+    char y = std::ceil(this->coordinate.y() / (450.f/8.f)) + 48;
+
+    std::shared_ptr<QString> note = std::make_shared<QString>(QChar(x) + y);
+    return note;
 }

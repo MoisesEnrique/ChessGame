@@ -21,10 +21,30 @@ Board::~Board()
     delete ui;
 }
 
+std::shared_ptr<QString> Board::toNote(QPoint& coord)
+{
+    char x = std::ceil(coord.x() / (450.f/8.f)) + 96;
+    char y = std::ceil(coord.y() / (450.f/8.f)) + 48;
+
+    std::shared_ptr<QString> note = std::make_shared<QString>(QChar(x) + y);
+    return note;
+}
+
 void Board::paintEvent(QPaintEvent *)
 {
     QPainter painter(this);
     painter.drawPixmap(0, 0, width(), height(), BoardFig);
+}
+
+void Board::drawCells()
+{
+    for (int f = 0; f < 8; ++f) {
+        for (int c = 0; c < 8; ++c) {
+            std::shared_ptr<QLabel> newCell = std::make_shared<QLabel>(this);
+            this->Cells.push_back(newCell);
+            newCell->setGeometry(c*55+10, f*55+10, 40, 45);
+        }
+    }
 }
 
 void Board::drawPieces()
@@ -38,6 +58,7 @@ void Board::drawPieces()
                 std::shared_ptr<Piece> newPiece = createPiece(type);
                 this->Pieces.push_back(newPiece);
                 newPiece->setGeometry(c*55+10, f*55+10, 40, 45);
+                newPiece->setAlignment(Qt::AlignHCenter);
                 newPiece->setCursor(Qt::PointingHandCursor);
                 newPiece->show();
 
@@ -96,25 +117,38 @@ void Board::mousePressEvent(QMouseEvent* event)
 {
     auto child = childAt(event->pos());
 
-    if(child == nullptr)
+    if(child == nullptr || !(dynamic_cast<Piece*>(child)))
     {
         return;
     }
 
-    QByteArray data;
-    QDataStream dataStream(&data, QIODevice::WriteOnly);
-
-    auto childP = static_cast<Piece*>(child);
+    auto childP = dynamic_cast<Piece*>(child);
     childP->coordinate = QPoint(child->pos().x(), child->pos().y());
 
+    /*switch (childP->type) {
+    case 'Q':
+        std::shared_ptr<QString> childPos = childP->toNote();
+        //std::cout << "works" << std::endl;
+        for (auto& c : Cells){
+            if(!(childPos->at(0) == toNote(c->pos())->at(0)))
+        }
+        break;
+    }*/
+
+    QByteArray data;
+    QDataStream dataStream(&data, QIODevice::WriteOnly);
     dataStream << QPoint(event->pos());
 
     QMimeData* mimeData = new QMimeData();
     mimeData->setData("application/x-dnditemdata", data);
 
     QDrag* drag = new QDrag(this);
+    QPixmap pixmap = childP->pixmap(Qt::ReturnByValue);
     drag->setMimeData(mimeData);
+    drag->setPixmap(pixmap);
+    drag->setHotSpot(event->pos() - childP->pos());
     drag->exec(Qt::CopyAction | Qt::MoveAction, Qt::CopyAction);
+
 }
 
 void Board::dragMoveEvent(QDragMoveEvent* event)
@@ -143,7 +177,6 @@ void Board::dragEnterEvent(QDragEnterEvent* event)
     } else {
         event->ignore();
     }
-
 }
 
 void Board::dropEvent(QDropEvent* e)
@@ -156,8 +189,6 @@ void Board::dropEvent(QDropEvent* e)
         dataStream >> offset;
 
         Piece* p = static_cast<Piece*>(childAt(offset));
-
-        //if (p->coordinate == )
         QPoint n = e->pos() - offset + p->coordinate;
 
         int newX = ((n.x())/ 55) * 55 + 10;
@@ -166,11 +197,9 @@ void Board::dropEvent(QDropEvent* e)
         QPoint newPosition(newX, newY);
 
         bool flag = false;
-        std::unique_ptr<Points> qWidget = std::make_unique<Points>(this);
-
         int i;
 
-        if (p->coordinate != newPosition)
+        if (p->coordinate != newPosition)// || es atras)
         {
             for(i = 0; i < Pieces.size(); ++i) {
                 if ( (std::abs(Pieces[i]->x() - newPosition.x()) <= 2)
@@ -185,7 +214,6 @@ void Board::dropEvent(QDropEvent* e)
                 {
                     emit printMoves(newPosition);
                     emit removePieces(Pieces[i]->type, Pieces[i]->colour);
-
                     p->move(newPosition);
                     p->coordinate = newPosition;
                     Pieces.removeAt(i);

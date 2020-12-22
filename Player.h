@@ -11,7 +11,7 @@ class Player : public QLabel
 protected:
     QPixmap Icon;
 public:
-    QVector<std::shared_ptr<Piece>> Pieces{};
+    QVector<std::shared_ptr<Piece>> DeadPieces{};
 
 public:
     explicit Player(QWidget* parent = nullptr);

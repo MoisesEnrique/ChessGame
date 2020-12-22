@@ -55,10 +55,10 @@ void Points::addPiecePlayer1(char type)
     }
 
     removedPiece->setPixmap(removedPiece->Icon.scaled(QSize(25,25), Qt::KeepAspectRatio));
-    removedPiece->setGeometry((player1->Pieces.size()%6)*30, (player1->Pieces.size()/6)*30, 30, 30);
+    removedPiece->setGeometry((player1->DeadPieces.size()%6)*30, (player1->DeadPieces.size()/6)*30, 30, 30);
     removedPiece->show();
 
-    this->player1->Pieces.push_back(removedPiece);
+    this->player1->DeadPieces.push_back(removedPiece);
 
 }
 
@@ -89,10 +89,10 @@ void Points::addPiecePlayer2(char type)
     }
 
     removedPiece->setPixmap(removedPiece->Icon.scaled(QSize(25,25), Qt::KeepAspectRatio));
-    removedPiece->setGeometry((player2->Pieces.size()%6)*30, (player2->Pieces.size()/6)*30, 30, 30);
+    removedPiece->setGeometry((player2->DeadPieces.size()%6)*30, (player2->DeadPieces.size()/6)*30, 30, 30);
     removedPiece->show();
 
-    this->player2->Pieces.push_back(removedPiece);
+    this->player2->DeadPieces.push_back(removedPiece);
 }
 
 void Points::addPieces(char type, bool colour)
