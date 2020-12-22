@@ -2,6 +2,7 @@
 
 Knight::Knight(QWidget* parent, bool colour) : Piece(parent, colour)
 {
+    type = 'H';
     if (colour)
         Icon.load("../ChessGame/Icons/Knight_white.png");
     else

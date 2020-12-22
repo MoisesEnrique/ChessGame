@@ -2,6 +2,7 @@
 
 Bishop::Bishop(QWidget* parent, bool colour) : Piece(parent, colour)
 {
+    type = 'B';
     if (colour)
         Icon.load("../ChessGame/Icons/Bishop_white.png");
     else

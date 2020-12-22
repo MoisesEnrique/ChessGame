@@ -11,8 +11,9 @@ class Piece;
 class Piece : public QLabel
 {
     Q_OBJECT
-protected:
+public:
     QPixmap Icon;
+    char type{};
 public:
     bool colour;
     QPoint coordinate{};

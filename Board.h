@@ -35,6 +35,10 @@ public:
     void drawPieces();
     std::shared_ptr<Piece> createPiece(char type);
 
+signals:
+    void removePieces(char type, bool colour);
+    void printMoves(QPoint start, QPoint final);
+
 private:
     QPixmap BoardFig;
     Ui::Board *ui;
@@ -50,9 +54,6 @@ private:
     };
 
     QVector<std::shared_ptr<Piece>> Pieces{};
-
-    //QVector<std::shared_ptr<Piece>> black_pieces{};
-    //QVector<std::shared_ptr<Piece>> white_pieces{};
 
 };
 

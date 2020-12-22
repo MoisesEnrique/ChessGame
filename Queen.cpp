@@ -2,6 +2,7 @@
 
 Queen::Queen(QWidget* parent, bool colour) : Piece(parent, colour)
 {
+    type = 'Q';
     if (colour)
         Icon.load("../ChessGame/Icons/Queen_white.png");
     else

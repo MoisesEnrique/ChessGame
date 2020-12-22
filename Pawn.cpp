@@ -1,8 +1,8 @@
 #include "Pawn.h"
-#include <iostream>
 
 Pawn::Pawn(QWidget* parent, bool colour) : Piece(parent, colour)
 {
+    type = 'P';
     if (colour){
         Icon.load("../ChessGame/Icons/Pawn_white.png");
     }

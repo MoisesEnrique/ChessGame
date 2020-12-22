@@ -26,12 +26,12 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QWidget" name="widget_2" native="true">
+   <widget class="Points" name="PointsWidget" native="true">
     <property name="geometry">
      <rect>
       <x>9</x>
       <y>9</y>
-      <width>221</width>
+      <width>222</width>
       <height>470</height>
      </rect>
     </property>
@@ -39,12 +39,12 @@
      <bool>false</bool>
     </property>
    </widget>
-   <widget class="QWidget" name="widget_3" native="true">
+   <widget class="Summary" name="SummaryWidget" native="true">
     <property name="geometry">
      <rect>
       <x>683</x>
       <y>9</y>
-      <width>221</width>
+      <width>222</width>
       <height>470</height>
      </rect>
     </property>
@@ -77,6 +77,18 @@
    <class>Board</class>
    <extends>QWidget</extends>
    <header>Board.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>Points</class>
+   <extends>QWidget</extends>
+   <header>Points.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>Summary</class>
+   <extends>QWidget</extends>
+   <header>Summary.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

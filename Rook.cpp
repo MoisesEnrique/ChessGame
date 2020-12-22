@@ -2,6 +2,7 @@
 
 Rook::Rook(QWidget* parent, bool colour) : Piece(parent, colour)
 {
+    type = 'R';
     if (colour)
         Icon.load("../ChessGame/Icons/Rook_white.png");
     else

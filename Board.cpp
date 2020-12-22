@@ -1,8 +1,9 @@
 #include "Board.h"
+#include "ui_Board.h"
 #include <memory>
 #include <iostream>
 #include <cmath>
-#include "ui_Board.h"
+#include "Points.h"
 
 Board::Board(QWidget *parent) :
     QWidget(parent),
@@ -36,11 +37,6 @@ void Board::drawPieces()
             if (type != 'x'){
                 std::shared_ptr<Piece> newPiece = createPiece(type);
                 this->Pieces.push_back(newPiece);
-                /*if(newPiece->colour)
-                    this->white_pieces.push_back(newPiece);
-                else
-                    this->black_pieces.push_back(newPiece);
-                    */
                 newPiece->setGeometry(c*55+10, f*55+10, 40, 45);
                 newPiece->setCursor(Qt::PointingHandCursor);
                 newPiece->show();
@@ -169,9 +165,9 @@ void Board::dropEvent(QDropEvent* e)
 
         QPoint newPosition(newX, newY);
 
-        std::cout << p->coordinate.x() << ", " << p->coordinate.y() << std::endl;
-        std::cout << "to " << newPosition.x() << ", " <<newPosition.y() << std::endl;
         bool flag = false;
+        std::unique_ptr<Points> qWidget = std::make_unique<Points>(this);
+
         int i;
 
         if (p->coordinate != newPosition)
@@ -189,7 +185,7 @@ void Board::dropEvent(QDropEvent* e)
                 {
                     p->move(newPosition);
                     p->coordinate = newPosition;
-                    p->show();
+                    emit removePieces(Pieces[i]->type, Pieces[i]->colour);
                     Pieces.removeAt(i);
                 }
             }else {

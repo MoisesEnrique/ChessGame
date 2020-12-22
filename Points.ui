@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Points</class>
+ <widget class="QWidget" name="Points">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>221</width>
+    <height>470</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <widget class="QWidget" name="ListPiecesPlayer1" native="true">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>90</y>
+     <width>180</width>
+     <height>91</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QWidget" name="ListPiecesPlayer2" native="true">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>301</y>
+     <width>180</width>
+     <height>91</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLabel" name="NamePlayer1">
+   <property name="geometry">
+    <rect>
+     <x>100</x>
+     <y>45</y>
+     <width>81</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Player 1</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="NamePlayer2">
+   <property name="geometry">
+    <rect>
+     <x>100</x>
+     <y>416</y>
+     <width>91</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Player 2</string>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

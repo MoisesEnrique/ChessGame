@@ -2,6 +2,7 @@
 
 King::King(QWidget* parent, bool colour) : Piece(parent, colour)
 {
+    type = 'K';
     if (colour)
         Icon.load("../ChessGame/Icons/King_white.png");
     else
