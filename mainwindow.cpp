@@ -6,6 +6,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    connect(ui->BoardWidget,&Board::printMoves, ui->SummaryWidget, &Summary::printMoves);
     connect(ui->BoardWidget,&Board::removePieces, ui->PointsWidget, &Points::addPieces);
 }
 

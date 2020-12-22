@@ -37,7 +37,7 @@ public:
 
 signals:
     void removePieces(char type, bool colour);
-    void printMoves(QPoint start, QPoint final);
+    void printMoves(QPoint& final);
 
 private:
     QPixmap BoardFig;

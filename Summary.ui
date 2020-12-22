@@ -19,7 +19,7 @@
      <x>10</x>
      <y>30</y>
      <width>201</width>
-     <height>341</height>
+     <height>420</height>
     </rect>
    </property>
    <property name="cursor" stdset="0">
@@ -34,7 +34,7 @@
       <x>0</x>
       <y>0</y>
       <width>199</width>
-      <height>339</height>
+      <height>418</height>
      </rect>
     </property>
    </widget>

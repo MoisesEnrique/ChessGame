@@ -183,15 +183,17 @@ void Board::dropEvent(QDropEvent* e)
             if (flag) {
                 if(Pieces[i]->colour != p->colour)
                 {
+                    emit printMoves(newPosition);
+                    emit removePieces(Pieces[i]->type, Pieces[i]->colour);
+
                     p->move(newPosition);
                     p->coordinate = newPosition;
-                    emit removePieces(Pieces[i]->type, Pieces[i]->colour);
                     Pieces.removeAt(i);
                 }
             }else {
+                emit printMoves(newPosition);
                 p->move(newPosition);
                 p->coordinate = newPosition;
-                p->show();
             }
 
         }

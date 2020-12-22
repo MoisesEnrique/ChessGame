@@ -3,6 +3,8 @@
 
 #include <QWidget>
 #include <QLabel>
+#include <cmath>
+#include <iostream>
 
 namespace Ui {
 class Summary;
@@ -12,16 +14,14 @@ class Summary : public QWidget
 {
     Q_OBJECT
 public:
-    QVector<std::shared_ptr<QLabel>> movPlayer1;
-    QVector<std::shared_ptr<QLabel>> movPlayer2;
+    QVector<std::shared_ptr<QLabel>> moves;
 
 public:
     explicit Summary(QWidget *parent = nullptr);
     ~Summary();
 
 public slots:
-    void printMoves(QPoint start, QPoint final);
-
+    void printMoves(QPoint& final);
 private:
     Ui::Summary *ui;
 
