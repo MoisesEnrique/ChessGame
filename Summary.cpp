@@ -1,5 +1,6 @@
 #include "Summary.h"
 #include "ui_Summary.h"
+#include <QVBoxLayout>
 
 Summary::Summary(QWidget *parent) :
     QWidget(parent),
@@ -18,7 +19,7 @@ void Summary::printMoves(QPoint& final)
 
     if (moves.size() % 3 == 0){
         std::shared_ptr<QLabel> number = std::make_shared<QLabel>(ui->scrollAreaWidgetContents);
-        number->setText(QString(QChar(moves.size()/2 + 1 + 48)) + QString(QChar(46)));
+        number->setNum(moves.size()/3 + 1);
         number->setGeometry(0, 17*moves.size()/3, 25, 17);
         number->show();
 
