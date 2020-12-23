@@ -11,6 +11,8 @@ public:
     explicit Pawn(QWidget* parent = nullptr, bool colour = true);
     ~Pawn();
     bool shouldMove(QPoint& final);
+    bool couldEat(QPoint& enemy);
+    bool couldNotEat(QPoint& enemy);
 };
 
 

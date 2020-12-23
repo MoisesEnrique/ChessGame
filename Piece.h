@@ -23,6 +23,8 @@ public:
     std::shared_ptr<QString> toNote();
     std::shared_ptr<QString> toNote(QPoint& coord);
     virtual bool shouldMove(QPoint& final) = 0;
+    virtual bool couldEat(QPoint& enemy) = 0;
+    virtual bool couldNotEat(QPoint& enemy) = 0;
 };
 
 #endif // PIECE_H

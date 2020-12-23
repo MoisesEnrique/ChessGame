@@ -17,13 +17,8 @@ bool Queen::shouldMove(QPoint& final)
     unsigned difC = std::abs(this->toNote()->toStdString()[0] - toNote(final)->toStdString()[0]);
     unsigned difR = std::abs(this->toNote()->toStdString()[1] - toNote(final)->toStdString()[1]);
 
-    if ( (difC == difR) ||
-         ( difR == 0 ) ||
-         ( difC == 0 ) )
-    {
-        return true;
-    }
-    return false;
-
+    return ( difC == difR) ||
+           ( difR == 0 ) ||
+           ( difC == 0 );
 
 }

@@ -200,19 +200,28 @@ void Board::dropEvent(QDropEvent* e)
                 }
             }
 
-            if (flag) {
+            if (flag)
+            {
                 if(Pieces[i]->colour != p->colour)
                 {
+                    if (p->couldEat(newPosition))
+                    {
+                        emit printMoves(newPosition);
+                        emit removePieces(Pieces[i]->type, Pieces[i]->colour);
+                        p->move(newPosition);
+                        p->coordinate = newPosition;
+                        Pieces.removeAt(i);
+                    }
+                }
+            }
+            else
+            {
+                if (p->couldNotEat(newPosition))
+                {
                     emit printMoves(newPosition);
-                    emit removePieces(Pieces[i]->type, Pieces[i]->colour);
                     p->move(newPosition);
                     p->coordinate = newPosition;
-                    Pieces.removeAt(i);
                 }
-            }else {
-                emit printMoves(newPosition);
-                p->move(newPosition);
-                p->coordinate = newPosition;
             }
 
         }

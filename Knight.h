@@ -10,6 +10,8 @@ class Knight : public Piece
 public:
     explicit Knight(QWidget* parent = nullptr, bool colour = true);
     bool shouldMove(QPoint& final);
+    bool couldEat(QPoint& enemy) {return true;}
+    bool couldNotEat(QPoint& enemy) {return true;}
 };
 
 #endif // KNIGHT_H

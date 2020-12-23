@@ -10,6 +10,8 @@ class King : public Piece
 public:
     explicit King(QWidget* parent = nullptr, bool colour = true);
     bool shouldMove(QPoint& final);
+    bool couldEat(QPoint& enemy) {return true;}
+    bool couldNotEat(QPoint& enemy) {return true;}
 };
 
 #endif // KING_H

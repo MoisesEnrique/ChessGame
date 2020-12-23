@@ -58,3 +58,17 @@ bool Pawn::shouldMove(QPoint& final)
     return false;
 
 }
+
+bool Pawn::couldEat(QPoint& enemy)
+{
+    unsigned difC = std::abs(this->toNote()->toStdString()[0] - toNote(enemy)->toStdString()[0]);
+    unsigned difR = std::abs(this->toNote()->toStdString()[1] - toNote(enemy)->toStdString()[1]);
+
+    return difC == difR;
+
+}
+
+bool Pawn::couldNotEat(QPoint &enemy)
+{
+    return !couldEat(enemy);
+}
