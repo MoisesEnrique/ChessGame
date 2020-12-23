@@ -8,6 +8,7 @@ class Rook : public Piece
     Q_OBJECT
 public:
     explicit Rook(QWidget* parent = nullptr, bool colour = true);
+    bool shouldMove(QPoint& final);
 };
 
 #endif // ROOK_H

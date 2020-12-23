@@ -21,6 +21,8 @@ public:
 public:
     explicit Piece(QWidget* parent = nullptr, bool _colour = true);
     std::shared_ptr<QString> toNote();
+    std::shared_ptr<QString> toNote(QPoint& coord);
+    virtual bool shouldMove(QPoint& final) = 0;
 };
 
 #endif // PIECE_H

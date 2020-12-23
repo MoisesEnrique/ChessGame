@@ -10,6 +10,7 @@ class Pawn : public Piece
 public:
     explicit Pawn(QWidget* parent = nullptr, bool colour = true);
     ~Pawn();
+    bool shouldMove(QPoint& final);
 };
 
 

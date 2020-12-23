@@ -13,3 +13,12 @@ std::shared_ptr<QString> Piece::toNote()
     std::shared_ptr<QString> note = std::make_shared<QString>(QChar(x) + y);
     return note;
 }
+
+std::shared_ptr<QString> Piece::toNote(QPoint& coord)
+{
+    char x = std::ceil(coord.x() / (450.f/8.f)) + 96;
+    char y = std::ceil(coord.y() / (450.f/8.f)) + 48;
+
+    std::shared_ptr<QString> note = std::make_shared<QString>(QChar(x) + y);
+    return note;
+}

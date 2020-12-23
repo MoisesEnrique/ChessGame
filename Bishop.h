@@ -9,6 +9,7 @@ class Bishop : public Piece
     Q_OBJECT
 public:
     explicit Bishop(QWidget* parent = nullptr, bool colour = true);
+    bool shouldMove(QPoint& final);
 };
 
 #endif // BISHOP_H

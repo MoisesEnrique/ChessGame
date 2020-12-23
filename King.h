@@ -9,6 +9,7 @@ class King : public Piece
     Q_OBJECT
 public:
     explicit King(QWidget* parent = nullptr, bool colour = true);
+    bool shouldMove(QPoint& final);
 };
 
 #endif // KING_H

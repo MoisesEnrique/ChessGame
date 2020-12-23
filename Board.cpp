@@ -103,7 +103,7 @@ std::shared_ptr<Piece> Board::createPiece (char type)
         newPiece = std::make_shared<Queen>(this, true);
         break;
     case 'k':
-        newPiece = std::make_shared<Rook>(this, true);
+        newPiece = std::make_shared<King>(this, true);
         break;
     case 'p':
         newPiece = std::make_shared<Pawn>(this, true);
@@ -124,16 +124,6 @@ void Board::mousePressEvent(QMouseEvent* event)
 
     auto childP = dynamic_cast<Piece*>(child);
     childP->coordinate = QPoint(child->pos().x(), child->pos().y());
-
-    /*switch (childP->type) {
-    case 'Q':
-        std::shared_ptr<QString> childPos = childP->toNote();
-        //std::cout << "works" << std::endl;
-        for (auto& c : Cells){
-            if(!(childPos->at(0) == toNote(c->pos())->at(0)))
-        }
-        break;
-    }*/
 
     QByteArray data;
     QDataStream dataStream(&data, QIODevice::WriteOnly);
@@ -199,8 +189,9 @@ void Board::dropEvent(QDropEvent* e)
         bool flag = false;
         int i;
 
-        if (p->coordinate != newPosition)// || es atras)
+        if ( (p->coordinate != newPosition) && (p->shouldMove(newPosition)) )
         {
+
             for(i = 0; i < Pieces.size(); ++i) {
                 if ( (std::abs(Pieces[i]->x() - newPosition.x()) <= 2)
                      && (std::abs(Pieces[i]->y() - newPosition.y()) <= 2)) {
