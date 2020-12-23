@@ -23,40 +23,38 @@ bool Pawn::shouldMove(QPoint& final)
     unsigned difC = std::abs(this->toNote()->toStdString()[0] - toNote(final)->toStdString()[0]);
     unsigned difR = std::abs(this->toNote()->toStdString()[1] - toNote(final)->toStdString()[1]);
 
-    if (difC == 0)
+    if(this->colour)
     {
-        if(difR == 2)
+        if (this->toNote()->toStdString()[1] - toNote(final)->toStdString()[1] >= 1)
         {
-            if((this->toNote()->toStdString()[1] == '7') && this->colour){
-                if (this->toNote()->toStdString()[1] - toNote(final)->toStdString()[1] == 2)
-                    return true;
-                return false;
-            }
+            if ( (this->toNote()->toStdString()[1] == '7') && (difR == 2) && (difC != 2))
+                return true;
 
-            if(this->toNote()->toStdString()[1] == '2'){
-                if (this->toNote()->toStdString()[1] - toNote(final)->toStdString()[1] == -2)
-                    return true;
-                return false;
-            }
-            return false;
-        }
-
-        if(difR == 1)
-        {
-            if(this->colour){
-                if (this->toNote()->toStdString()[1] - toNote(final)->toStdString()[1] == 1)
-                    return true;
-                return false;
-            }
-
-            if (this->toNote()->toStdString()[1] - toNote(final)->toStdString()[1] == -1)
+            if (difR == 1)
                 return true;
 
             return false;
         }
 
-
+        return false;
     }
+
+    else
+    {
+        if (this->toNote()->toStdString()[1] - toNote(final)->toStdString()[1] <= -1)
+        {
+            if ( (this->toNote()->toStdString()[1] == '2') && (difR == 2) && (difC != 2))
+                return true;
+
+            if (difR == 1)
+                return true;
+
+            return false;
+        }
+
+        return false;
+    }
+
     return false;
 
 }
