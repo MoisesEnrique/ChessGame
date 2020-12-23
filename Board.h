@@ -43,6 +43,13 @@ signals:
     void removePieces(char type, bool colour);
     void printMoves(QPoint& final);
 
+/*public slots:
+    void OnClickSalir()
+    {
+        QString text = "Jaque Mate Gana Negro";
+        QMessageBox::information(this, "QMessageBox", text, QMessageBox::Ok);
+    }*/
+
 private:
     QPixmap BoardFig;
     Ui::Board *ui;
@@ -54,12 +61,11 @@ private:
         {'x','x','x','x','x','x','x','x'},
         {'x','x','x','x','x','x','x','x'},
         {'p','p','p','p','p','p','p','p'},
-        {'r','h','b','k','q','b','h','r'}
+        {'r','h','b','q','k','b','h','r'}
     };
 
     QVector<std::shared_ptr<Piece>> Pieces{};
     QVector<std::shared_ptr<QLabel>> Cells{};
-
 };
 
 #endif // BOARD_H

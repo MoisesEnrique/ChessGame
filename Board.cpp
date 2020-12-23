@@ -9,6 +9,7 @@ Board::Board(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::Board)
 {
+
     ui->setupUi(this);
     BoardFig.load("../ChessGame/Icons/board.png");
     setAcceptDrops(true);

@@ -22,6 +22,8 @@ public:
 
 public slots:
     void printMoves(QPoint& final);
+/*signals:
+    void OnClickSalir();*/
 private:
     Ui::Summary *ui;
 

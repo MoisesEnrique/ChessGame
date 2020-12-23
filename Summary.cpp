@@ -22,9 +22,13 @@ void Summary::printMoves(QPoint& final)
 {
 
     char x = std::ceil(final.x() / (450.f/8.f)) + 96;
-    char y = std::ceil(final.y() / (450.f/8.f)) + 48;
+    char y = 57 - std::ceil(final.y() / (450.f/8.f));
+
+    //QString b(QChar(x) + z);
 
     QTableWidgetItem* it = new QTableWidgetItem(QString(QChar(x)) + y);
+
+    //QString a(QChar('h') + '4');
 
     if(rowOrColum)
     {
@@ -35,6 +39,10 @@ void Summary::printMoves(QPoint& final)
     else
     {
         ui->logTable->setItem(ui->logTable->rowCount() - 1, 1, it);
+
+        /*if (a == b)
+            emit OnClickSalir();*/
+
         rowOrColum = true;
     }
 
