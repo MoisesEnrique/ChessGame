@@ -7,6 +7,10 @@ Summary::Summary(QWidget *parent) :
     ui(new Ui::Summary)
 {
     ui->setupUi(this);
+    ui->logTable->setColumnCount(2);
+    ui->logTable->setRowCount(0);
+    ui->logTable->setColumnWidth(0,12);
+    ui->logTable->horizontalHeader()->hide();
 }
 
 Summary::~Summary()
@@ -17,22 +21,21 @@ Summary::~Summary()
 void Summary::printMoves(QPoint& final)
 {
 
-    if (moves.size() % 3 == 0){
-        std::shared_ptr<QLabel> number = std::make_shared<QLabel>(ui->scrollAreaWidgetContents);
-        number->setNum(moves.size()/3 + 1);
-        number->setGeometry(0, 17*moves.size()/3, 25, 17);
-        number->show();
-
-        moves.push_back(number);
-    }
-
     char x = std::ceil(final.x() / (450.f/8.f)) + 96;
     char y = std::ceil(final.y() / (450.f/8.f)) + 48;
 
-    std::shared_ptr<QLabel> move = std::make_shared<QLabel>(ui->scrollAreaWidgetContents);
-    move->setText(QString(QChar(x)) + y);
-    move->setGeometry(25*(moves.size()%3), 17*std::floor(moves.size()/3), 25, 17);
-    move->show();
+    QTableWidgetItem* it = new QTableWidgetItem(QString(QChar(x)) + y);
 
-    moves.push_back(move);
+    if(rowOrColum)
+    {
+        ui->logTable->setRowCount(ui->logTable->rowCount() + 1);
+        ui->logTable->setItem(ui->logTable->rowCount() - 1, 0, it);
+        rowOrColum = false;
+    }
+    else
+    {
+        ui->logTable->setItem(ui->logTable->rowCount() - 1, 1, it);
+        rowOrColum = true;
+    }
+
 }

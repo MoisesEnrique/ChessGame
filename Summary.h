@@ -14,8 +14,8 @@ class Summary : public QWidget
 {
     Q_OBJECT
 public:
-    QVector<std::shared_ptr<QLabel>> moves;
-
+    //QVector<std::shared_ptr<QLabel>> moves;
+    bool rowOrColum{true};
 public:
     explicit Summary(QWidget *parent = nullptr);
     ~Summary();

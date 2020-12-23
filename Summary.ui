@@ -18,8 +18,8 @@
     <rect>
      <x>8</x>
      <y>49</y>
-     <width>201</width>
-     <height>401</height>
+     <width>200</width>
+     <height>392</height>
     </rect>
    </property>
    <property name="palette">
@@ -97,18 +97,23 @@
      <rect>
       <x>0</x>
       <y>0</y>
-      <width>199</width>
-      <height>399</height>
+      <width>198</width>
+      <height>390</height>
      </rect>
     </property>
+    <layout class="QGridLayout" name="gridLayout">
+     <item row="0" column="0">
+      <widget class="QTableWidget" name="logTable"/>
+     </item>
+    </layout>
    </widget>
   </widget>
-  <widget class="QLabel" name="label">
+  <widget class="QLabel" name="Movements">
    <property name="geometry">
     <rect>
-     <x>70</x>
+     <x>67</x>
      <y>10</y>
-     <width>80</width>
+     <width>91</width>
      <height>17</height>
     </rect>
    </property>
