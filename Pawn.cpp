@@ -70,5 +70,10 @@ bool Pawn::couldEat(QPoint& enemy)
 
 bool Pawn::couldNotEat(QPoint &enemy)
 {
-    return !couldEat(enemy);
+    unsigned difC = std::abs(this->toNote()->toStdString()[0] - toNote(enemy)->toStdString()[0]);
+    unsigned difR = std::abs(this->toNote()->toStdString()[1] - toNote(enemy)->toStdString()[1]);
+
+    if ((difR <= 2) && (difC == 0))
+        return true;
+    return false;
 }
